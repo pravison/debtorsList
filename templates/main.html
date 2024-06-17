@@ -1,0 +1,237 @@
+<!-- /*
+* Template Name: Property
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Untree.co" />
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="bootstrap, bootstrap5" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'css/tiny-slider.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    <title>
+     theCRB - {% block title %} {% endblock %}
+    </title>
+  </head>
+  <body>
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close">
+          <span class="icofont-close js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <nav class="site-nav">
+      <div class="container">
+        <div class="menu-bg-wrap">
+          <div class="site-navigation">
+            <a href="{% url 'search' %}" class="logo m-0 float-start">theCRB
+            </a>
+
+            <ul
+              class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
+            >
+              <li class="active"><a href="{% url 'search' %}">Search</a></li>
+              
+              {% if request.user.is_authenticated %}
+
+              <li class="has-children">
+                <a href="#">{{request.user.username}}</a>
+                <ul class="dropdown">
+                  <li><a href="#">{{request.user.first_name}} {{request.user.last_name}}</a></li>
+                  <li><a href="#">Your Points: {% if request.user.profile.point %} {{request.user.profile.point}} {% else %} 0 {% endif %}</a></li>
+                  <li><a href="{% url 'profile' %}">Complete Profile</a></li>
+                  <li><a href="{% url 'add-defaulter' %}">add defaulter</a></li>
+                  <li><a href="{% url 'signout' %}">logout</a></li>
+                </ul>
+              </li>
+
+              <li class="hide-on-desktop"><a href="#">{{request.user.first_name}} {{request.user.last_name}}</a></li>
+              <li class="hide-on-desktop"><a href="#">Your Points: {% if request.user.profile.point %} {{request.user.profile.point}} {% else %} 0 {% endif %}</a></li>
+              <li class="hide-on-desktop"><a href="{% url 'profile' %}">Complete Profile</a></li>
+              <li class="hide-on-desktop"><a href="{% url 'add-defaulter' %}">add defaulter</a></li>
+              <li class="hide-on-desktop"><a href="{% url 'signout' %}">logout</a></li>
+              {% else %}
+              <li><a href="{% url 'signin' %}">Login</a></li>
+              {% endif %}
+            </ul>
+
+            <a
+              href="#"
+              class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none"
+              data-toggle="collapse"
+              data-target="#main-navbar"
+            >
+              <span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    {% block content %}
+   
+    {% endblock content %}
+    <div class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="row justify-content-center align-items-center">
+          
+            <div class="col-lg-9 text-center">
+              <h3>subscribe to learn best ways to collect defaulted accounts</h3>
+               <form
+                  method="POST"
+                  action="{% url 'subscribe' %}"
+                  class="narrow-w form-search d-flex align-items-stretch mb-3"
+                  data-aos="fade-up"
+                  data-aos-delay="200"
+                >
+                {% csrf_token %}
+                  <input
+                    type="email"
+                    name="email"
+                    class="form-control px-4"
+                    placeholder="type your email"
+                  />
+                  <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+          </div>  
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Contact</h3>
+              <address>4th floor Delta Corner Westland,  Nairobi Kenya</address>
+              <ul class="list-unstyled links">
+                <li><a href="tel://0740562740">+254740562740</a></li>
+                <li><a href="tel://0732451430">+254732451430</a></li>
+                <li>
+                  <a href="mailto:saleflowpro88@gmail.com">saleflowpro88@gmail.com</a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Sources</h3>
+              <ul class="list-unstyled float-start links">
+                <!-- <li><a href="index.html#">About us</a></li>
+                <li><a href="index.html#">Services</a></li>
+                <li><a href="index.html#">Vision</a></li>
+                <li><a href="index.html#">Mission</a></li> -->
+                <li><a href="{% url 'terms' %}">Terms</a></li>
+                <li><a href="{% url 'privacy' %}">Privacy</a></li>
+              </ul>
+              <!-- <ul class="list-unstyled float-start links">
+                <li><a href="index.html#">Partners</a></li>
+                <li><a href="index.html#">Business</a></li>
+                <li><a href="index.html#">Careers</a></li>
+                <li><a href="index.html#">Blog</a></li>
+                <li><a href="index.html#">FAQ</a></li>
+                <li><a href="index.html#">Creative</a></li>
+              </ul> -->
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Links</h3>
+              <ul class="list-unstyled links">
+                <li><a href="{% url 'initiate_payment' %}">Buy Points</a></li>
+                <li><a href="{% url 'add-defaulter' %}">Add Defaulter</a></li>
+                <li><a href="{% url 'launch_a_complain' %}">Have A Complain</a></li>
+                <li><a href="{% url 'search' %}">Search</a></li>
+              </ul>
+
+              <ul class="list-unstyled social">
+                <li>
+                  <a href="#"><span class="icon-instagram"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-twitter"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-facebook"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-linkedin"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-pinterest"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-dribbble"></span></a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row mt-5">
+          <div class="col-12 text-center">
+            <!-- 
+              **==========
+              NOTE: 
+              Please don't remove this copyright link unless you buy the license here https://untree.co/license/  
+              **==========
+            -->
+
+            <p>
+              Copyright &copy;
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              . All Rights Reserved. &mdash; Designed with love by
+              <a href="https://salesflowpro.xyz/" target="_blank">Salesflow Pro</a>
+            </p>
+          
+          </div>
+        </div>
+      </div>
+      <!-- /.container -->
+    </div>
+    <!-- /.site-footer -->
+
+    <!-- Preloader -->
+    <div id="overlayer"></div>
+    <div class="loader">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/tiny-slider.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    <script src="{% static 'js/navbar.js' %}"></script>
+    <script src="{% static 'js/counter.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+  </body>
+</html>

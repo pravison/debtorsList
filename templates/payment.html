@@ -1,0 +1,71 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Login {% endblock %}
+
+{% block content %}
+<main>
+  <div class="container">
+
+    <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+            <div class="d-flex justify-content-center py-4">
+              <a href="{% url 'search' %}" class="logo d-flex align-items-center w-auto">
+                <!-- <img src="assets/img/logo.png" alt=""> -->
+                <span class="d-none d-lg-block">CRB</span>
+              </a>
+            </div><!-- End Logo -->
+
+            <div class="card mb-3">
+
+              <div class="card-body">
+
+                <div class="pt-4 pb-2">
+                  <h5 class="card-title text-center pb-0 fs-4">Purchase Points </h5>
+                  <p class="text-center small"><strong>Each Point costs <span style="color: black; font-weight: 100;">ksh. 10</span></strong></p>
+                </div>
+
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                      {{ message }}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+
+                  {% endfor %}
+                {% endif %}
+                <form class="row g-3 needs-validation" action="{% url 'initiate_payment' %}" method="POST">
+                  {% csrf_token %}
+                  <div class="col-12">
+                    <label for="form2Example2"  class="form-label">email</label>
+                    <input type="email"required id="form2Example2" class="form-control" name="email">
+                    <div class="invalid-feedback">Please enter your email</div>
+                  </div>
+                  <div class="col-12">
+                    <label for="form2Example1"  class="form-label">enter amount you want to spend</label>
+                    <input type="number" min=10 required id="form2Example1" class="form-control" name="amount">
+                    <div class="invalid-feedback">Please enter your amount</div>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-primary w-100" type="submit">Purchase</button>
+                  </div>
+                  <div class="col-12">
+                    <p class="small mb-0"> head to <a href="{% url 'search' %}">Search</a> page</p>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+</main><!-- End #main -->
+
+{% endblock %}

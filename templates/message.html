@@ -1,0 +1,89 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}launch a complain {% endblock %}
+{% block content %}
+<div
+    class="hero page-inner overlay"
+    style="background-image: url('images/hero_bg_1.jpg')"
+>
+    <div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-lg-9 text-center mt-5">
+        <h1 class="heading" data-aos="fade-up">Send Us A Message </h1>
+
+        <nav
+            aria-label="breadcrumb"
+            data-aos="fade-up"
+            data-aos-delay="200"
+        >
+            <ol class="breadcrumb text-center justify-content-center">
+            <li class="breadcrumb-item"><a href="{% url 'search' %}">Home</a></li>
+            <li
+                class="breadcrumb-item active text-white-50"
+                aria-current="page"
+            >
+                Message
+            </li>
+            </ol>
+        </nav>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+        <form action="{% url 'send_a_message' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+            <div class="col-6 mb-3">
+                <input
+                type="text"
+                name ="name"
+                class="form-control"
+                placeholder="Your Name"
+                />
+            </div>
+            <div class="col-6 mb-3">
+                <input
+                type="email"
+                name="email"
+                class="form-control"
+                placeholder="Your Email"
+                />
+            </div>
+            <div class="col-12 mb-3">
+                <input
+                type="text"
+                name="subject"
+                class="form-control"
+                placeholder="Subject"
+                />
+            </div>
+            <div class="col-12 mb-3">
+                <textarea
+                name="message"
+                id=""
+                cols="30"
+                rows="7"
+                class="form-control"
+                placeholder="Message"
+                ></textarea>
+            </div>
+
+            <div class="col-12">
+                <input
+                type="submit"
+                value="Send Message"
+                class="btn btn-primary"
+                />
+            </div>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock content %}

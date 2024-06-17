@@ -1,0 +1,105 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}search results {% endblock %}
+{% block content %}
+{% if no_results %}
+<section class="features-1">
+<div class="container">
+    <div class="row">
+    <div class="col-12 col-lg-12" data-aos="fade-up" data-aos-delay="300">
+        <div class="box-feature">
+        <h3 class="mb-1">Results For Customer ID No. : {{query}} </h3>
+        </div>
+    </div>
+    </div>
+</div>
+</section>
+<section class="features-1">
+<div class="container">
+    <div class="row">
+    <div class="col-12 col-lg-12" data-aos="fade-up" data-aos-delay="300">
+        
+        <div class="box-feature">
+        <h3 class="mb-1">No Results Found  For Customer ID No. : {{query}} </h3>
+        </div>
+        <div class="box-feature">
+        <h3 class="mb-1">seems Customer hasn't defaulted yet or taken any loan  </h3>
+        </div>
+    </div>
+    </div>
+</div>
+</section>
+{% else %}
+<section class="features-1">
+<div class="container">
+    <div class="row">
+    <div class="col-12 col-lg-12" data-aos="fade-up" data-aos-delay="300">
+        <div class="box-feature">
+        <h3 class="mb-1">Results For Customer ID No. : </h3>
+        </div>
+    </div>
+    </div>
+</div>
+</section>
+<section class="features-1">
+<div class="container">
+    <div class="row">
+    <div class="col-12 col-lg-12" data-aos="fade-up" data-aos-delay="300">
+        <div class="box-feature">
+        <h3 class="mb-1">Results For Customer ID No. : {{query}}</h3>
+        </div>
+    </div>
+    </div>
+</div>
+</section>
+<section class="features-1">
+<div class="container">
+    <div class="row">
+    <div class="col-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="box-feature">
+        <h3 class="mb-3">Total Loans in Default</h3>
+        <p> <span style="color:black;">{{total_loans}}</span></p>
+        </div>
+    </div>
+    <div class="col-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+        <div class="box-feature">
+        <h3 class="mb-3">Total Amount in Default</h3>
+        <p> <span style="color:black;">{{total_amount}}</span></p>
+        </div>
+    </div>
+    <div class="col-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+        <div class="box-feature">
+        <h3 class="mb-3">Average Loans Before Default</h3>
+        <p> <span style="color:black;">{{average_loans_taken_before_default}}</span></p>
+        </div>
+    </div>
+    
+    </div>
+</div>
+</section>
+{% for defaulter in  defaulters %}
+<section class="features-1">
+<div class="container">
+    <div class="row">
+    <div class="col-12 col-lg-12" data-aos="fade-up" data-aos-delay="300">
+        <div class="box-feature">
+        <h3 class="mb-3">{{ defaulter.customer_name}}</h3>
+        <p> <span style="color:black;">ID No. :</span>{{ defaulter.national_id}}</p>
+        <p><span style="color:black;">Location : </span>{{ defaulter.customer_location}}</p>
+        <p><span style="color:black;">Bussiness Type :</span>{{ defaulter.bussiness_type}}</p>
+        <p><span style="color:black;">No. of Loans taken Before Default: </span>{{ defaulter.number_of_loans_taken}}</p>
+        <p><span style="color:black;">Amout in Default :</span>{{ defaulter.amount_in_default}}</p>
+        <p><span style="color:black;">Company Defaulted :</span>{{ defaulter.company_defaulted}}</p>
+        <p><span style="color:black;">Date Defaulted :</span>{{ defaulter.date_defaulted}}</p>
+        <p><span style="color:black;">Date Added :</span>{{ defaulter.date_added}}</p>
+        {% if defaulter.added_by == request.user %}
+        <p><a href="{% url 'clear_defaulter' %}?customer={{defaulter.id}}" class="learn-more" title="this proccess cannot be undone be sure you want to clear the customer from the list">clear customer</a></p>
+        {% endif %}
+        </div>
+    </div>
+    </div>
+</div>
+</section>
+  {% endfor %}
+{% endif %}
+{% endblock content %}

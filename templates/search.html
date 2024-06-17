@@ -1,0 +1,103 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}search{% endblock %}
+{% block content %}
+    <div class="hero">
+      <div class="hero-slide">
+        <div
+          class="img overlay"
+          style="background-image: url('images/hero_bg_3.jpg')"
+        ></div>
+        <div
+          class="img overlay"
+          style="background-image: url('images/hero_bg_2.jpg')"
+        ></div>
+        <div
+          class="img overlay"
+          style="background-image: url('images/hero_bg_1.jpg')"
+        ></div>
+      </div>
+
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          
+          <div class="col-lg-9 text-center">
+            {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+
+
+            {% endfor %}
+          {% endif %}
+            <h1 class="heading" data-aos="fade-up">
+              Find Out If Customer Has Defaulted In Other Companies
+            </h1>
+            <form
+              action="{% url 'search-results' %}"
+              class="narrow-w form-search d-flex align-items-stretch mb-3"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <input
+                type="number"
+                class="form-control px-4"
+                name="query"
+                placeholder="enter customers ID  to search"
+              />
+              <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <section class="features-1">
+      <div class="container">
+        <div class="row">
+          <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+            <div class="box-feature">
+              <span class="flaticon-house"></span>
+              <h3 class="mb-3">Purchase Points</h3>
+              <p>
+                We use Points to make a search  every search you make costs you 1 point
+              </p>
+              <p><a href="{% url 'initiate_payment' %}" class="learn-more">Buy Points</a></p>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
+            <div class="box-feature">
+              <span class="flaticon-building"></span>
+              <h3 class="mb-3">Have A complain</h3>
+              <p>
+                Do you feel you have been wrongfully listed to this platform or have a message for us 
+              </p>
+              <p><a href="{% url 'launch_a_complain' %}" class="learn-more">Reach Out</a></p>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+            <div class="box-feature">
+              <span class="flaticon-house-3"></span>
+              <h3 class="mb-3">Terms and Conditions</h3>
+              <p>
+                By using the Platform, you agree to these terms and conditions.
+              </p>
+              <p><a href="{% url 'terms' %}" class="learn-more">Learn More</a></p>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="600">
+            <div class="box-feature">
+              <span class="flaticon-house-1"></span>
+              <h3 class="mb-3">Privacy Policy</h3>
+              <p>
+                By using our platform, you agree to the terms of this privacy policy.
+              </p>
+              <p><a href="{% url 'privacy' %}" class="learn-more">Learn More</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endblock content %}

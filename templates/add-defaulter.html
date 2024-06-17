@@ -1,0 +1,105 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}add defaulter {% endblock %}
+
+{% block content %}
+<main>
+  <div class="container">
+
+    <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+            <div class="d-flex justify-content-center py-4">
+              <a href="{% url 'search' %}" class="logo d-flex align-items-center w-auto">
+                <!-- <img src="assets/img/logo.png" alt=""> -->
+                <span class="d-none d-lg-block">CRB</span>
+              </a>
+            </div><!-- End Logo -->
+
+            <div class="card mb-3">
+
+              <div class="card-body">
+
+                <div class="pt-4 pb-2">
+                  <h5 class="card-title text-center pb-0 fs-4">Add Defaulter</h5>
+                  <p class="text-center small">if you wrongly list someone you will face legal action from them and you will be fully responsible</p>
+                </div>
+
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                      {{ message }}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+
+                  {% endfor %}
+                {% endif %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  We counter check data added to our system if found providing false data you will be banned from adding defaulters
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <form class="row g-3 needs-validation"  method="POST" action="{% url 'add-defaulter' %}">
+                  {% csrf_token %}
+                  <div class="col-12">
+                    <label for="yourcustomer_name" class="form-label">Defaulter Full Name</label>
+                    <div class="input-group has-validation">
+                      <input type="text" name="customer_name" class="form-control" id="yourcustomer_name" required>
+                      <div class="invalid-feedback">Please enter Defaulter Full Name.</div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="yournational_id" class="form-label">National Id</label>
+                    <input type="text" name="national_id" class="form-control" id="yournational_id" required>
+                    <div class="invalid-feedback">Please enter Defaulter National Id!</div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="yourcustomer_location" class="form-label">Location</label>
+                    <input type="text" name="customer_location" class="form-control" id="yourcustomer_location" required>
+                    <div class="invalid-feedback">Please enter Defaulter Location!</div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="yourbussiness_type" class="form-label">Customer Bussiness Type</label>
+                    <input type="text" name="bussiness_type" class="form-control" id="yourbussiness_type" required>
+                    <div class="invalid-feedback">Please enter Customer Bussiness Type!</div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="yournumber_of_loans_taken" class="form-label">Number of Loans Taken</label>
+                    <input type="number" name="number_of_loans_taken" class="form-control" id="yournumber_of_loans_taken" required>
+                    <div class="invalid-feedback">Please enter Number of Loans Taken!</div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="youramount_in_default" class="form-label">Amount in Default</label>
+                    <input type="number" name="amount_in_default" class="form-control" id="youramount_in_default" required>
+                    <div class="invalid-feedback">Please enter Amount in Default!</div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="yourdate_defaulted" class="form-label">Date Defaulted</label>
+                    <input type="date" name="date_defaulted" class="form-control" id="yourdate_defaulted" required>
+                    <div class="invalid-feedback">Please enter Date Defaulted!</div>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-primary w-100" type="submit">add Defaulter</button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+</main><!-- End #main -->
+
+  {% endblock %}
