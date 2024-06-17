@@ -53,7 +53,7 @@ def searchResults(request):
         
         return render(request, 'search-results.html', context)
     else:
-        return redirect('search')
+        return redirect('initiate_payment')
 
 @login_required(login_url="/account/signin/")
 def addDefaulter(request):
